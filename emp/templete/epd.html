@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  {%extends 'home.html'%}
+  {%load static%}
+  <script type="text/javascript" src="{%static 'jq/jq.js' %}"></script>
+  <link rel="stylesheet" href="{%static 'cssb/bootstrap.min.css' %}">
+  <script type="text/javascript" src="{%static 'js/bootstrap.min.js' %}"></script>
+
+</head>
+
+<body>
+  {%block body%}
+  <div class="container emp-profile pb-3">
+
+
+    <div class="row">
+      <span class="btn btn-warning " style="margin-right:10px;width: 100px;">details about {{ep.username}}</span>
+      <div class="col-4" style="width: 200px;padding: 30px;">
+        <div>fname</div>
+        <div>lname</div>
+        <div>username</div>
+        <div>gender</div>
+        <div>age</div>
+        <div>phone</div>
+        <div>email</div>
+        <div>salary</div>
+        <div>expriance</div>
+        <div>position</div>
+        <div>graduated from</div>
+        <div>graduated year</div>
+      </div>
+      <div class="col-4" style="width: 200px;padding: 30px; ">
+        <div> {{ep.fname}}</div>
+        <div> {{ep.lname}}</div>
+        <div> {{ep.username}}</div>
+        <div> {{ep.gender}}</div>
+        <div> {{ep.age}}</div>
+        <div> {{ep.phone}}</div>
+        <div> {{ep.email}}</div>
+        <div> {{ep.salary}}</div>
+        <div> {{ep.exp}} year</div>
+        <div> {{ep.role}}</div>
+        <div> {{ep.gfrom}}</div>
+        <div> {{ep.gyear}}</div>
+      </div>
+      <div class="col-4 " style="width:400px ;float:right;padding: 30px;margin-left:300px">
+
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          MSC
+        </button>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;<button type="button" class="btn btn-primary"
+          data-bs-toggle="modal" data-bs-target="#exampleModal1">
+          PHD
+        </button> <b class="btn btn-primary">profile:</b> <img src="{{ep.image.url}}"
+          style="width:100px;height:100px;border-radius:50%" /> <br>
+        <b class="btn btn-danger">certeficate:</b>bachlour degree<br><img src="" style="width:400px;height:400px;" />
+        <br><br>
+        <p>certeficate validate status</p><b style="color: red;" class="btn btn-info">valid:</b><span
+          class="btn btn-warning" style="color:green">{{ep.valid}}</span>
+        <br><br><b style="color:blue ;">bachleor degree cmgpa:</b>&nbsp;&nbsp;<span
+          style="color: red;">{{ep.bcmgpa}}</span>
+        <br><br><b style="color:blue ;">bachleor join date:</b>&nbsp;&nbsp;<span style="color: red;">{{ep.bach}}</span>
+        <br><br>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          edit
+        </button>
+
+
+
+
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">MSC certeficate information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <b class="btn btn-danger">certeficate OF:</b>MSC degree<br><img src=""
+                  style="width:400px;height:400px;" />
+                <br><br>
+                <p>certeficate validate status</p><b style="color: red;" class="btn btn-info">valid:</b><span
+                  class="btn btn-warning" style="color:green">{{ep.valid}}</span>
+                <br><br><b style="color:blue ;">MSC cmgpa:</b>&nbsp;&nbsp;<span style="color: red;">{{ep.mcmgpa}}</span>
+                <br><br><b style="color:blue ;">MSc join date:</b>&nbsp;&nbsp;<span
+                  style="color: red;">{{ep.msc}}</span>
+                <br><br>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+          </div>
+        </div>
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">phd certeficate information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <b class="btn btn-danger">certeficate OF:</b>PHD<br><img src="" style="width:400px;height:400px;" />
+                <br><br>
+                <p>certeficate validate status</p><b style="color: red;" class="btn btn-info">valid:</b><span
+                  class="btn btn-warning" style="color:green">{{ep.valid}}</span>
+                <br><br><b style="color:blue ;">PHD cmgpa:</b>&nbsp;&nbsp;<span style="color: red;">{{ep.pcmgpa}}</span>
+                <br><br>
+                <b style="color:blue ;">phd join date:</b>&nbsp;&nbsp;<span style="color: red;">{{ep.phd}}</span>
+                <br><br>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">update employees </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post" enctype="multipart/form-data" id="frm">
+            {%csrf_token%}
+
+            <label for="" class="form-label">enter frist name</label>
+            <input type="text" class="form-control " name="fname" id="fname" value="{{ep.fname}}">
+
+
+            <label for="" class="form-label">enter last name</label>
+            <input type="text" class="form-control " name="lname" id="lname" value="{{ep.lname}}">
+            <label for="" class="form-label">enter username</label>
+            <input type="text" class="form-control " name="username" id="username" value="{{ep.username}}">
+
+            <label for="" class="form-label">enter gender</label>
+            <input type="text" class="form-control is-valid" name="gender" id="gender" value="{{ep.gender}}">
+
+
+            <label for="" class="form-label">enter phone</label>
+            <input type="text" class="form-control " name="phone" id="phone" value="{{ep.phone}}">
+            <label for="" class="form-label">enter email</label>
+
+            <input type="email" class="form-control " name="email" id="email" value="{{ep.email}}">
+
+            <label for="" class="form-label">enter salary</label>
+            <input type="text" class="form-control " name="salary" id="salary" value="{{ep.salary}}">
+
+
+            <label for="" class="form-label">enter expriance</label>
+            <input type="text" class="form-control " name="exp" id="exp" value="{{ep.exp}}">
+            <label for="" class="form-label">enter position</label>
+            <input type="text" class="form-control " name="role" id="role" value="{{ep.role}}">
+            <label for="" class="form-label">enter graduated from</label>
+            <input type="text" class="form-control " name="gfrom" id="gfrom" value="{{ep.gfrom}}">
+
+
+            <label for="" class="form-label">enter graduated year</label>
+            <input type="date" class="form-control " name="gyear" id="gyear" value="{{ep.gyear}}">
+            <label for="" class="form-label">photo of employ</label>
+            <p>{{ep.bimage}}</p>
+            <input type="file" class="form-control " name="bimage" id="bimage" value="{{ep.bimage}}">
+            <button type="submit" class="btn btn-primary">save</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var btn = document.querySelector('#btn');
+    var fn = document.querySelector('#fname');
+    fn.addEventListener('keyup', () => {
+      if (fn.value != "" && fn.value.length >= 1) {
+        fn.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        fn.setAttribute("class", "form-control is-invalid");
+        fn.setAttribute("name", "");
+        btn.setAttribute("style", "display:none")
+      }
+    })
+    var ln = document.querySelector('#lname');
+    ln.addEventListener('keyup', () => {
+      if (ln.value != "" && ln.value.length >= 1) {
+        ln.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        ln.setAttribute("class", "form-control is-invalid");
+        ln.setAttribute("name", "");
+        btn.setAttribute("style", "display:none")
+      }
+    })
+    var un = document.querySelector('#username');
+    un.addEventListener('keyup', () => {
+      if (un.value != "" && un.value.length >= 1) {
+        un.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        un.setAttribute("class", "form-control is-invalid");
+        un.setAttribute("name", "");
+        btn.setAttribute("style", "display:none")
+      }
+    })
+    var pn = document.querySelector('#phone');
+    pn.addEventListener('keyup', () => {
+      if (pn.value != "" && pn.value.length >= 1) {
+        pn.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        pn.setAttribute("class", "form-control is-invalid");
+        pn.setAttribute("name", "");
+        btn.setAttribute("style", "display:none")
+      }
+    })
+    var em = document.querySelector('#email');
+    em.addEventListener('keyup', () => {
+      var en = em.value;
+      var at = en.indexOf('@');
+      var ps = en.lastIndexOf('.');
+      if (at < 1 || ps < at + 2 || ps + 2 >= em.length) {
+        em.setAttribute("value", "invalid email");
+        em.setAttribute("class", "form-control is-invalid");
+        em.setAttribute("name", "");
+        btn.setAttribute("style", "display:none")
+      } else {
+        em.setAttribute("class", "form-control is-invalid");
+        em.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      }
+    })
+    var sl = document.querySelector('#salary');
+    sl.addEventListener('keyup', () => {
+      if (sl != "") {
+        sl.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        sl.setAttribute("class", "form-control is-invalid");
+        sl.setAttribute("name", "");
+
+      }
+    })
+    var exp = document.querySelector('#exp');
+    exp.addEventListener('keyup', () => {
+      if (exp != "") {
+        exp.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        exp.setAttribute("class", "form-control is-invalid");
+        exp.setAttribute("name", "");
+
+      }
+    })
+    var rol = document.querySelector('#role');
+    rol.addEventListener('keyup', () => {
+      if (rol != "") {
+        rol.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        rol.setAttribute("class", "form-control is-invalid");
+        rol.setAttribute("name", "");
+
+
+      }
+    })
+    var gfrom = document.querySelector('#gfrom');
+    gfrom.addEventListener('keyup', () => {
+      if (gfrom != "") {
+        gfrom.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        gfrom.setAttribute("class", "form-control is-invalid");
+        gfrom.setAttribute("name", "");
+
+      }
+    })
+    var gyear = document.querySelector('#gyear');
+    gyear.addEventListener('change', () => {
+      if (gyear != "") {
+        gyear.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        gyear.setAttribute("class", "form-control is-invalid");
+        gyear.setAttribute("name", "");
+
+      }
+    })
+    var bimage = document.querySelector('#bimage');
+    bimage.addEventListener('change', () => {
+      if (bimage != "") {
+        bimage.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        bimage.setAttribute("class", "form-control is-invalid");
+        bimage.setAttribute("name", "");
+
+      }
+    })
+  </script>
+  <script>
+
+
+    /*$(document).ready(function(){
+    
+    var csrf=$("input[name=csrfmiddlewaretoken]");
+      $('#frm').on('submit',function(e){
+        e.preventDefault();
+        $.ajax({
+        type:'post',
+        url:'',
+        data:{
+        fnam:$('#fname').val(),
+        lnam:$('#lname').val(),
+        usernam:$('#username').val(),
+        gende:$('#gender').val(),
+        phon:$('#phone').val()
+        ,
+         emai:$('#email').val(),
+  
+         salar:$('#salary').val(),
+        ex:$('#exp').val(),
+        rol:$('#role').val(),
+        gfro:$('#gfrom').val(),
+        gyea:$('#gyear').val()
+        ,
+         bimag:$('#bimage').val(),
+        },
+        success:function(response){
+  
+        }
+        })
+      })
+    })*/
+  </script>
+
+  {%endblock%}
+</body>
+
+</html>

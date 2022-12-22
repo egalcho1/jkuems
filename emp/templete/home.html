@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'cssb/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{%static 'js/bootstrap.min.js' %}"></script>
+</head>
+<style>
+    .ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+        background-color: #111;
+    }
+
+    .active {
+        background-color: #4CAF50;
+    }
+</style>
+
+
+<body onload="body()">
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-success text-white">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    <a href="/"
+                        class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline">Menu</span>
+                    </a>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+                        id="menu">
+                        <li class="nav-item">
+                            <a href="{%url 'emp:home'%}" class="nav-link align-middle px-0">
+                                <i class="fs-4 bi-house"></i> <span
+                                    class="ms-1 d-none d-sm-inline text-white">Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-speedometer2"></i> <span
+                                    class="ms-1 d-none d-sm-inline text-white">Dashboard</span> </a>
+                            <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                <li class="w-100">
+                                <li class="w-100"> <a href="{%url 'core:profiles' %}" class="nav-link px-0"><span
+                                            class="d-none d-sm-inline text-white">employees</span></a>
+                                </li>
+                                <li class="w-100">
+                                    <a href="{%url 'core:index'%}" class="nav-link px-0"> <span
+                                            class="d-none d-sm-inline text-white">scanner</span></a>
+                                </li>
+                                <li class="w-100">
+                                    <a href="{%url 'emp:empr'%}" class="nav-link px-0"> <span
+                                            class="d-none d-sm-inline text-white">employe report</span></a>
+                                </li>
+                                <li>
+                                    <a href="{%url 'emp:atr'%}" class="nav-link px-0"> <span
+                                            class="d-none d-sm-inline text-white">attendance report</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-table"></i> <span
+                                    class="ms-1 d-none d-sm-inline text-white">request</span></a>
+                        </li>
+                        <li>
+                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline text-white">task
+                                    status</span></a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">task
+                                            report</span> </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-grid"></i> <span
+                                    class="ms-1 d-none d-sm-inline text-white">advertisment</span> </a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">new
+                                            employees</span> </a>
+                                </li>
+                                <li>
+                                    <a href="{%url 'emp:search'%}" class="nav-link px-0"> <span
+                                            class="d-none d-sm-inline text-white">exam </span> </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-0"> <span
+                                            class="d-none d-sm-inline text-white">number departiment</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-0"> <span
+                                            class="d-none d-sm-inline text-white">departiment request</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-people"></i> <span
+                                    class="ms-1 d-none d-sm-inline text-white">Customers</span> </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <div class="dropdown pb-4">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{%static 'pic/p.jpg' %}" alt="hugenerd" width="30" height="30"
+                                class="rounded-circle">
+                            <span class="d-none d-sm-inline mx-1 text-white">profile</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                            <li><a class="dropdown-item text-white" href="#">New project...</a></li>
+                            <li><a class="dropdown-item text-white" href="#">Settings</a></li>
+                            <li><a class="dropdown-item text-white" href="#">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item text-white" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col py-3">
+
+
+                <div class="conatainer-sm " style="top:0">
+                    <div class="collapse" id="navbarToggleExternalContent">
+                        <div class="bg-white p-4">
+                            <ul class="ul">
+                                <li><a href="#" class="active">home</a></li>
+                                <li> <a href="{%url 'emp:register' %}" class="">register</a></li>
+
+                                <li> <a href="{%url 'core:profiles' %}" class="">employes</a></li>
+                                <li> <a href="#" class="">contanct</a></li>
+
+                                <li> <a href="#" class="">service</a></li>
+                                <li> <a href="#" class="">privace</a></li>
+
+                                <li> <a href="#" class="">about</a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <nav class="navbar navbar-dark bg-info">
+                        <div class="container-fluid">
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarToggleExternalContent"
+                                aria-controls="navbarToggleExternalContent" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+
+
+                            </button>
+                            <span class="btn">welcome to jinka university online employees management system home
+                                page</span>
+                            <span class="" style="float:right ;"><img src="{%static 'pic/p.jpg'%}"
+                                    style="width:50px;height:50px;border-radius:50%" /></span>
+                        </div>
+                    </nav>
+                    {%block body%}
+
+                    <div class="row">
+                        <div class="col-3">
+                            <b>Total employees</b><br>
+                            <span id="span" class="btn btn-success text-white"
+                                style="width:200px;height:100px">0<br>{{en}}</span>
+
+                        </div>
+                        <div class="col-3">
+                            <b>Total male employees</b><br>
+                            <span id="span1" class="btn btn-warning " style="width: 200px;height:100px">0</span>
+
+                        </div>
+                        <div class="col-3">
+                            <b>Total femal employees</b><br>
+                            <span id="span2" class="btn btn-danger " style="width: 200px;height:100px">{{en}}</span>
+
+                        </div>
+                        <div class="col-3">
+                            <b>Total age under 30 employees</b><br>
+                            <span id="span3" class="btn btn-info " style="width: 200px;height:100px">0</span>
+
+                        </div>
+                    </div>
+                    <hr style="height: 40px;" class="shadow-lg">
+                    <div class="row">
+                        <div class="col-3">
+                            <b>Total active employees</b><br>
+                            <span id="span5" class="btn btn-success text-white"
+                                style="width: 200px;height:100px">0</span>
+
+                        </div>
+                        <div class="col-3">
+                            <b>Total salary above 10000 employees</b><br>
+                            <span id="span6" class="btn btn-warning " style="width: 200px;height:100px">0</span>
+
+                        </div>
+                        <div class="col-3">
+                            <b>Total salary below 10000 employees</b><br>
+                            <span id="span7" class="btn btn-danger " style="width: 200px;height:100px">{{en}}</span>
+
+                        </div>
+                        <div class="col-3">
+                            <b>Total salary above 20000 employees</b><br>
+                            <span id="span8" class="btn btn-info " style="width: 200px;height:100px">0</span>
+
+                        </div>
+                    </div>
+                    <hr style="height: 40px;" class="shadow-lg">
+                    <div class="row">
+                        <div class="col-3">
+                            <b>Total employees width disablity</b><br>
+                            <span id="span5" class="btn btn-success text-white"
+                                style="width: 200px;height:100px">0</span>
+
+                        </div>
+                        <div class="col-3">
+                            <b>Total employees bachlour degree</b><br>
+                            <span id="span6" class="btn btn-warning " style="width: 200px;height:100px">0</span>
+
+                        </div>
+                        <div class="col-3">
+                            <b>Totalemployees who have MSc</b><br>
+                            <span id="span7" class="btn btn-danger " style="width: 200px;height:100px">{{en}}</span>
+
+                        </div>
+                        <div class="col-3">
+                            <b>Total employees who have PHD</b><br>
+                            <span id="span8" class="btn btn-info " style="width: 200px;height:100px">0</span>
+
+                        </div>
+                    </div>
+                    <hr style="height: 40px;" class="shadow-lg">
+                    <div class="row">
+                        <div class="col-3">
+                            <b>Total lecturer</b><br>
+                            <span id="span5" class="btn btn-success text-white"
+                                style="width: 200px;height:100px">0</span>
+
+                        </div>
+                        <div class="col-3">
+                            <b>Total employees office worker</b><br>
+                            <span id="span6" class="btn btn-warning " style="width: 200px;height:100px">0</span>
+
+                        </div>
+                        <div class="col-3">
+                            <b>Total employe slary per month</b><br>
+                            <span id="span7" class="btn btn-danger " style="width: 200px;height:100px">{{en}}</span>
+
+                        </div>
+                        <div class="col-3">
+
+                            <div id="myProgress">
+                                <div id="myBar">
+                                    <div id="label">10%</div>
+                                </div>
+                            </div> <br> <button onclick="move()">Click Here</button>
+
+                        </div>
+                    </div>
+                    <hr style="height: 40px;" class="shadow-lg">
+                    <script>
+                        function body() {
+
+                            var n = 1;
+                            var n1 = 2000;
+                            var sp = document.querySelector('#span');
+                            var sp1 = document.querySelector('#span1');
+                            var sp2 = document.querySelector('#span2');
+                            var sp3 = document.querySelector('#span3');
+                            //var p=document.querySelector('p').value;
+                            var d = setInterval(function () {
+                                n += 1;
+                                sp.innerHTML = n;
+                            }, 100);
+                            var d = setInterval(function () {
+                                n1 -= 1;
+                                sp1.innerHTML = n1;
+                            }, 100);
+
+
+                        }
+                    </script>
+                    <script>
+                        function move() {
+                            var elem = document.getElementById("myBar");
+                            var width = 10; var id = setInterval(frame, 10);
+                            function frame() {
+                                if (width >= 100) {
+                                    clearInterval(id);
+                                } else {
+                                    width++; elem.style.width = width + '%';
+                                    document.getElementById("label").innerHTML = width * 1 + '%';
+                                }
+                            }
+                        } 
+                    </script>
+
+                    <style>
+                        #myProgress {
+                            position: relative;
+                            width: 100%;
+                            height: 30px;
+                            background-color: #ddd;
+                        }
+
+                        #myBar {
+                            position: absolute;
+                            width: 10%;
+                            height: 100%;
+                            background-color: #48d1cc;
+                        }
+
+                        #label {
+                            text-align: center;
+                            line-height: 30px;
+                            color: white;
+                        }
+                    </style>
+
+                </div>
+
+
+
+            </div>
+
+            {%endblock%}
+
+</body>
+
+</html>

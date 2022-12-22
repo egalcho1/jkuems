@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  {%extends 'home.html'%}
+  {%load static%}
+  <link rel="stylesheet" href="{%static 'cssb/bootstrap.min.css' %}">
+  <script type="text/javascript" src="{%static 'js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{%static 'jqu/jquery.min.js' %}"></script>
+</head>
+
+<body>
+  {%block body%}
+  <style>
+    #myInput {
+      background-image: url('/img/search.png');
+      background-position: 5px 10px;
+      background-size: 40px;
+      background-repeat: no-repeat;
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 16px;
+      padding: 12px 20px 12px 40px;
+      border: 1px solid #ddd;
+      margin-bottom: 12px;
+    }
+
+    #myTable {
+      border-collapse: collapse;
+      width: 100%;
+      border: 1px solid #ddd;
+      font-size: 18px;
+    }
+
+    #myTable th,
+    #myTable td {
+      text-align: left;
+      padding: 12px;
+    }
+
+    #myTable tr {
+      border-bottom: 1px solid #ddd;
+    }
+
+    #myTable tr.header,
+    #myTable tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+  <div class="container-sm ">
+    <div class="bg-success">
+      <span class="h4 bg-success"> </span>
+    </div>
+
+    <div class="conatainer-sm ">
+      <br>
+      <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by frist name...."
+        title="Type in a name" style="width: 1100px;">
+
+
+      <div style="float: right;"><button type="button" class="btn btn-success" data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop" style="font-size: 50px;">
+          &plus;
+        </button>
+      </div>
+      <table class="table table-responsive table-condensed  table-hover shadow table-striped" id="myTable"
+        style="width:90%">
+        <th>id</th>
+
+
+        <th>fname</th>
+        <th>lname</th>
+
+        <th>gender</th>
+        <th>delete</th>
+
+
+
+
+
+        <th>profile</th>
+
+        {%for n in en%}
+        <tr>
+          <td>{{forloop.counter}}</td>
+
+
+          <td>{{n.fname}}</td>
+          <td>{{n.lname}}</td>
+
+          <td>{{n.gender}}</td>
+
+
+          <td><a href="{%url 'emp:empd' n.id %}"><img src="{{n.bimage.url}}"
+                style="width:40px;height:40px;border-radius:50%"></a></td>
+          <td><a href="{%url 'emp:dela' n.id %}">delete</a></td>
+        </tr>{%endfor%}
+
+      </table>
+    </div>
+  </div>
+
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">new employees </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post" enctype="multipart/form-data" id="frm">
+            {%csrf_token%}
+
+            <label for="" class="form-label">enter frist name</label>
+            <input type="text" class="form-control " name="fnam" id="fname" value="">
+
+
+            <label for="" class="form-label">enter last name</label>
+            <input type="text" class="form-control " name="lnam" id="lname" value="">
+            <label for="" class="form-label">enter username</label>
+            <input type="text" class="form-control " name="usernam" id="username" value="">
+
+            <label for="" class="form-label">enter gender</label>
+            <select name="gende" id="gender" class="form-control is-valid">
+              <option>male</option>
+              <option>female</option>
+              <option>costom</option>
+            </select>
+
+
+            <label for="" class="form-label">enter phone</label>
+            <input type="text" class="form-control " name="phon" id="phone" value="">
+            <label for="" class="form-label">enter email</label>
+
+            <input type="email" class="form-control " name="ema" id="email" value="">
+
+            <label for="" class="form-label">enter salary</label>
+            <input type="text" class="form-control " name="salar" id="salary" value="">
+
+
+            <label for="" class="form-label">enter expriance</label>
+            <input type="text" class="form-control " name="exp" id="exp" value="">
+            <label for="" class="form-label">enter position</label>
+            <input type="text" class="form-control " name="rol" id="role" value="">
+            <label for="" class="form-label">enter graduated from</label>
+            <input type="text" class="form-control " name="gfro" id="gfrom" value="">
+
+
+            <label for="" class="form-label">enter graduated year</label>
+            <input type="date" class="form-control " name="gyea" id="gyear" value="">
+            <label for="" class="form-label">photo of employ</label>
+            <p>{{ep.bimage}}</p>
+            <input type="file" class="form-control " name="bimag" id="bimage" value="">
+            <button type="submit" class="btn btn-primary" id="btn" style="display: none;">register</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script>
+    function myFunction() {
+      var input, filter, table, tr, td, i;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        tda = tr[i].getElementsByTagName("td")[2];
+        tdi = tr[i].getElementsByTagName("td")[0];
+        if (td, tda) {
+          if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || tda.innerHTML.toUpperCase().indexOf(filter) > -1 || tdi.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    } 
+  </script>
+  <script>
+    var btn = document.querySelector('#btn');
+    var fn = document.querySelector('#fname');
+    fn.addEventListener('keyup', () => {
+      if (fn.value != "" && fn.value.length >= 1) {
+        fn.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        fn.setAttribute("class", "form-control is-invalid");
+        fn.setAttribute("name", "");
+        btn.setAttribute("style", "display:none")
+      }
+    })
+    var ln = document.querySelector('#lname');
+    ln.addEventListener('keyup', () => {
+      if (ln.value != "" && ln.value.length >= 1) {
+        ln.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        ln.setAttribute("class", "form-control is-invalid");
+        ln.setAttribute("name", "");
+        btn.setAttribute("style", "display:none")
+      }
+    })
+    var un = document.querySelector('#username');
+    un.addEventListener('keyup', () => {
+      if (un.value != "" && un.value.length >= 1) {
+        un.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        un.setAttribute("class", "form-control is-invalid");
+        un.setAttribute("name", "");
+        btn.setAttribute("style", "display:none")
+      }
+    })
+    var pn = document.querySelector('#phone');
+    pn.addEventListener('keyup', () => {
+      if (pn.value != "" && pn.value.length >= 1) {
+        pn.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        pn.setAttribute("class", "form-control is-invalid");
+        pn.setAttribute("name", "");
+        btn.setAttribute("style", "display:none")
+      }
+    })
+    var em = document.querySelector('#email');
+    em.addEventListener('keyup', () => {
+      var en = em.value;
+      var at = en.indexOf('@');
+      var ps = en.lastIndexOf('.');
+      if (at < 1 || ps < at + 2 || ps + 2 >= em.length) {
+        em.setAttribute("value", "invalid email");
+        em.setAttribute("class", "form-control is-invalid");
+        em.setAttribute("name", "");
+        btn.setAttribute("style", "display:none")
+      } else {
+        em.setAttribute("class", "form-control is-invalid");
+        em.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      }
+    })
+    var sl = document.querySelector('#salary');
+    sl.addEventListener('keyup', () => {
+      if (sl != "") {
+        sl.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        sl.setAttribute("class", "form-control is-invalid");
+        sl.setAttribute("name", "");
+
+      }
+    })
+    var exp = document.querySelector('#exp');
+    exp.addEventListener('keyup', () => {
+      if (exp != "") {
+        exp.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        exp.setAttribute("class", "form-control is-invalid");
+        exp.setAttribute("name", "");
+
+      }
+    })
+    var rol = document.querySelector('#role');
+    rol.addEventListener('keyup', () => {
+      if (rol != "") {
+        rol.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        rol.setAttribute("class", "form-control is-invalid");
+        rol.setAttribute("name", "");
+
+
+      }
+    })
+    var gfrom = document.querySelector('#gfrom');
+    gfrom.addEventListener('keyup', () => {
+      if (gfrom != "") {
+        gfrom.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        gfrom.setAttribute("class", "form-control is-invalid");
+        gfrom.setAttribute("name", "");
+
+      }
+    })
+    var gyear = document.querySelector('#gyear');
+    gyear.addEventListener('change', () => {
+      if (gyear != "") {
+        gyear.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        gyear.setAttribute("class", "form-control is-invalid");
+        gyear.setAttribute("name", "");
+
+      }
+    })
+    var bimage = document.querySelector('#bimage');
+    bimage.addEventListener('change', () => {
+      if (bimage != "") {
+        bimage.setAttribute("class", "form-control is-valid");
+        btn.setAttribute("style", "display:block")
+      } else {
+        bimage.setAttribute("class", "form-control is-invalid");
+        bimage.setAttribute("name", "");
+
+      }
+    })
+  </script>
+  {%endblock%}
+</body>
+
+</html>

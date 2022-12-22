@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {%extends 'home.html'%}
+</head>
+{%block body%}
+
+<body onload="body()">
+
+
+
+    <div class="row">
+        <div class="col-3">
+            <b>Total employees</b><br>
+            <span id="span" class="btn btn-success text-white" style="width:200px;height:100px">0<br>{{en}}</span>
+
+        </div>
+        <div class="col-3">
+            <b>Total male employees</b><br>
+            <span id="span1" class="btn btn-warning " style="width: 200px;height:100px">0</span>
+
+        </div>
+        <div class="col-3">
+            <b>Total femal employees</b><br>
+            <span id="span2" class="btn btn-danger " style="width: 200px;height:100px">{{en}}</span>
+
+        </div>
+        <div class="col-3">
+            <b>Total age under 30 employees</b><br>
+            <span id="span3" class="btn btn-info " style="width: 200px;height:100px">0</span>
+
+        </div>
+    </div>
+    <hr style="height: 40px;" class="shadow-lg">
+    <div class="row">
+        <div class="col-3">
+            <b>Total active employees</b><br>
+            <span id="span5" class="btn btn-success text-white" style="width: 200px;height:100px">0</span>
+
+        </div>
+        <div class="col-3">
+            <b>Total salary above 10000 employees</b><br>
+            <span id="span6" class="btn btn-warning " style="width: 200px;height:100px">0</span>
+
+        </div>
+        <div class="col-3">
+            <b>Total salary below 10000 employees</b><br>
+            <span id="span7" class="btn btn-danger " style="width: 200px;height:100px">{{en}}</span>
+
+        </div>
+        <div class="col-3">
+            <b>Total salary above 20000 employees</b><br>
+            <span id="span8" class="btn btn-info " style="width: 200px;height:100px">0</span>
+
+        </div>
+    </div>
+    <hr style="height: 40px;" class="shadow-lg">
+    <div class="row">
+        <div class="col-3">
+            <b>Total employees width disablity</b><br>
+            <span id="span5" class="btn btn-success text-white" style="width: 200px;height:100px">0</span>
+
+        </div>
+        <div class="col-3">
+            <b>Total employees bachlour degree</b><br>
+            <span id="span6" class="btn btn-warning " style="width: 200px;height:100px">0</span>
+
+        </div>
+        <div class="col-3">
+            <b>Totalemployees who have MSc</b><br>
+            <span id="span7" class="btn btn-danger " style="width: 200px;height:100px">{{en}}</span>
+
+        </div>
+        <div class="col-3">
+            <b>Total employees who have PHD</b><br>
+            <span id="span8" class="btn btn-info " style="width: 200px;height:100px">0</span>
+
+        </div>
+    </div>
+    <hr style="height: 40px;" class="shadow-lg">
+    <div class="row">
+        <div class="col-3">
+            <b>Total lecturer</b><br>
+            <span id="span5" class="btn btn-success text-white" style="width: 200px;height:100px">0</span>
+
+        </div>
+        <div class="col-3">
+            <b>Total employees office worker</b><br>
+            <span id="span6" class="btn btn-warning " style="width: 200px;height:100px">0</span>
+
+        </div>
+        <div class="col-3">
+            <b>Total employe slary per month</b><br>
+            <span id="span7" class="btn btn-danger " style="width: 200px;height:100px">{{en}}</span>
+
+        </div>
+        <div class="col-3">
+            <b>Total employees per year</b><br>
+            <span id="span8" class="btn btn-info " style="width:200px;height:100px">0</span>
+
+        </div>
+    </div>
+    <hr style="height: 40px;" class="shadow-lg">
+    <script>
+        function body() {
+
+            var n = 1;
+            var n1 = 2000;
+            var sp = document.querySelector('#span');
+            var sp1 = document.querySelector('#span1');
+            var sp2 = document.querySelector('#span2');
+            var sp3 = document.querySelector('#span3');
+            //var p=document.querySelector('p').value;
+            var d = setInterval(function () {
+                n += 1;
+                sp.innerHTML = n;
+            }, 100);
+            var d = setInterval(function () {
+                n1 -= 1;
+                sp1.innerHTML = n1;
+            }, 100);
+
+
+        }
+    </script>
+    <style>
+        span {}
+    </style>
+
+    {%endblock%}
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+{%extends 'home.html'%}
+{%block body%}
+
+<body>
+
+    <style>
+        #myInput {
+            background-image: url('/img/search.png');
+            background-position: 5px 10px;
+            background-size: 40px;
+            background-repeat: no-repeat;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
+
+        #myTable {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #ddd;
+            font-size: 18px;
+        }
+
+        #myTable th,
+        #myTable td {
+            text-align: left;
+            padding: 12px;
+        }
+
+        #myTable tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        #myTable tr.header,
+        #myTable tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+    </head>
+
+    <body>
+        <h2>employees</h2>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by id...." title="Type in a name">
+
+
+        <table class="table table-responsive table-condensed  table-hover shadow table-striped" id="myTable"
+            style="width:90%">
+            <th>id</th>
+
+
+            <th>fname</th>
+            <th>lname</th>
+
+            <th>gender</th>
+            <th>delete</th>
+
+
+
+
+
+            <th>profile</th>
+
+            {%for n in en%}
+            <tr>
+                <td>{{forloop.counter}}</td>
+
+
+                <td>{{n.fname}}</td>
+                <td>{{n.lname}}</td>
+
+                <td>{{n.gender}}</td>
+
+
+                <td><a href="{%url 'emp:empd' n.id %}"><img src="{{n.bimage.url}}"
+                            style="width:40px;height:40px;border-radius:50%"></a></td>
+                <td><a href="{%url 'emp:dela' n.id %}">delete</a></td>
+            </tr>{%endfor%}
+
+        </table>
+        <script>
+            function myFunction() {
+                var input, filter, table, tr, td, i;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("myTable");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[1];
+                    if (td) {
+                        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            } 
+        </script>
+    </body>{%endblock%}
+
+</html>
+</body>
+
+</html>
