@@ -2,6 +2,7 @@ from django import forms
 from .models import *
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm,UsernameField
 
 #class Emp(forms.ModelForm):
     #class Meta:
@@ -21,5 +22,20 @@ class Registrf(UserCreationForm):
         
         for fname, f in self.fields.items():
             f.widget.attrs['class'] = 'form-control'
-          
+class  AuthenticationForma(AuthenticationForm):
+       class Meta:
+         model=User
+         fields=['username','password']
+         def __init__(self, *args, **kwargs):
+             super(Registrf, self).__init__(*args, **kwargs)
+             self.fields['username'].label = "enter username"
+             self.fields['password'].label = "enter password"
+            
+             self.fields['username'].widget.attrs['class'] = 'form-control'
+
+        
+             for fname, fa in self.fields.items():
+                fa.widget.attrs['class'] = 'form-control'
+                
+
 

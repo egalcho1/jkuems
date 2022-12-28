@@ -1,361 +1,416 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+{%load static %}
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    {%load static%}
-    <link rel="stylesheet" href="{%static 'cssb/bootstrap.min.css' %}">
-    <script type="text/javascript" src="{%static 'js/bootstrap.min.js' %}"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
 </head>
-<style>
-    .ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #333;
-    }
 
-    li {
-        float: left;
-    }
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+<link rel="stylesheet" href="{%static 'cssb/bootstrap.min.css' %}">
+<script type="text/javascript" src="{%static 'js/bootstrap.min.js' %}"></script>
 
-    li a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-    }
+<body>
+    <div class="sidebar">
+        <div class="p-4">
+            <a href="" class="logo"><img
+                    src="https://scontent.fadd1-1.fna.fbcdn.net/v/t1.6435-9/194392928_368840524633089_7831724522626651832_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=973b4a&_nc_ohc=c9s3kg8o4NQAX-QkX9T&_nc_ht=scontent.fadd1-1.fna&oh=00_AfBU9efx26mxuUSNWvZffTOCOWWtd9V8ZbPyG4jfUnq3Eg&oe=63D0B43F"
+                    style="width:30px;height:30px;border-radius:20px"> &nbsp;&nbsp;<b>jkuems</b></a>
 
-    /* Change the link color to #111 (black) on hover */
-    li a:hover {
-        background-color: #111;
-    }
+            <a class="active bi bi-house" href="#home"> &nbsp;&nbsp;Home</a>
+            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                <span class="ms-1 d-none d-sm-inline   bi bi-border-all active"> &nbsp;&nbsp;Dashboard</span> </a>
+            <a href="#news" class="bi bi-newspaper"> &nbsp;&nbsp;News</a>
+            <a href="#"><span class="bi bi-send"> &nbsp;&nbsp;Contacts</span> </a>
+            <a href="#about" class="bi bi-info-circle-fill"> &nbsp;&nbsp;About</a>
+            <div class="dropdown">
+                <button class="dropbtn" style="">service &nbsp;&nbsp;<i class="bi bi-caret-down-fill"></i></button>
+                <div class="dropdown-content" style="width:200px">
+                    <a href="{%url 'emp:request' %}" class="nav-link px-0 align-middle bi bi-question-circle-fill">
+                        &nbsp;&nbsp;request</a>
+                    {%if sup == True %}
 
-    .active {
-        background-color: #4CAF50;
-    }
-</style>
+                    <a href="{%url 'core:profiles' %}" class="nav-link px-0 bi bi-people-fill"> &nbsp;&nbsp;manage
+                        employee</a>
 
 
-<body onload="body()">
-    <div class="container-fluid">
-        <div class="row flex-nowrap">
-            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-success text-white">
-                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                    <a href="/"
-                        class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        <span class="fs-5 d-none d-sm-inline">Menu</span>
-                    </a>
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
-                        id="menu">
-                        <li class="nav-item">
-                            <a href="{%url 'emp:home'%}" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span
-                                    class="ms-1 d-none d-sm-inline text-white">Home</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-speedometer2"></i> <span
-                                    class="ms-1 d-none d-sm-inline text-white">Dashboard</span> </a>
-                            <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                <li class="w-100">
-                                <li class="w-100"> <a href="{%url 'core:profiles' %}" class="nav-link px-0"><span
-                                            class="d-none d-sm-inline text-white">employees</span></a>
-                                </li>
-                                <li class="w-100">
-                                    <a href="{%url 'core:index'%}" class="nav-link px-0"> <span
-                                            class="d-none d-sm-inline text-white">scanner</span></a>
-                                </li>
-                                <li class="w-100">
-                                    <a href="{%url 'emp:empr'%}" class="nav-link px-0"> <span
-                                            class="d-none d-sm-inline text-white">employe report</span></a>
-                                </li>
-                                <li>
-                                    <a href="{%url 'emp:atr'%}" class="nav-link px-0"> <span
-                                            class="d-none d-sm-inline text-white">attendance report</span></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-table"></i> <span
-                                    class="ms-1 d-none d-sm-inline text-white">request</span></a>
-                        </li>
-                        <li>
-                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline text-white">task
-                                    status</span></a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">task
-                                            report</span> </a>
-                                </li>
+                    <a href="{%url 'emp:salary'%}" class="nav-link px-0 bi bi-currency-dollar"> &nbsp;&nbsp; manage
+                        salary</a>
 
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-grid"></i> <span
-                                    class="ms-1 d-none d-sm-inline text-white">advertisment</span> </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-white">new
-                                            employees</span> </a>
-                                </li>
-                                <li>
-                                    <a href="{%url 'emp:search'%}" class="nav-link px-0"> <span
-                                            class="d-none d-sm-inline text-white">exam </span> </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0"> <span
-                                            class="d-none d-sm-inline text-white">number departiment</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0"> <span
-                                            class="d-none d-sm-inline text-white">departiment request</span></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-people"></i> <span
-                                    class="ms-1 d-none d-sm-inline text-white">Customers</span> </a>
-                        </li>
+                    <a href="{%url 'emp:users'%}" class="nav-link px-0 bi bi-person-circle"> &nbsp;&nbsp;manage
+                        users</a>
+
+                    <a href="{%url 'core:index'%}" class="nav-link px-0 bi bi-airplane-engines">&nbsp;&nbsp;manage
+                        leave</a>
+
+                    <a href="{%url 'emp:atr'%}" class="nav-link px-0 bi bi-calendar-day"> &nbsp;&nbsp;attendance
+                        report</a>
+
+                    {%elif type == "employer" %}
+
+
+                    <a href="{%url 'core:index'%}" class="nav-link px-0 bi bi-calendar-week-fill">&nbsp;&nbsp;check
+                        attendance</a>
+
+                    <a href="{%url 'core:index'%}" class="nav-link px-0 bi bi-currency-dollar"> &nbsp;&nbsp;check
+                        salary</a>
+
+                    {%elif type == "users" %}
+
+
+
+                    <a href="#submenu2" data-bs-toggle="collapse"
+                        class="nav-link px-0 align-middle bi bi-calendar-check">
+                        task
+                        status</a>
+
+                    <a href="#" class="nav-link px-0"> task
+                        report </a>
+
+
+
+
+
+
+
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="content">
+        <div class="conatainer-sm " style="top:0;margin-left: 50px;">
+            <div class="collapse" id="navbarToggleExternalContent">
+                <div class="bg-white p-4">
+                    <ul class="ul">
+
+                        {%if sup == True or type == "admin" or type == "employer" %}
+                        <li><a href="#" class="home" style="background-color: #47d34e;">home</a></li>
+                        <li> <a href="{%url 'emp:register' %}" class="">register</a></li>
+
+                        <li> <a href="{%url 'core:profiles' %}" class="">employes</a></li>
+                        {%endif%}
+                        <li> <a href="#" class="">contanct</a></li>
+
+                        <li> <a href="#" class="">service</a></li>
+                        <li> <a href="#" class="">privace</a></li>
+
+                        <li> <a href="#" class="">about</a></li>
                     </ul>
-                    <hr>
-                    <div class="dropdown pb-4">
-                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{%static 'pic/p.jpg' %}" alt="hugenerd" width="30" height="30"
-                                class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1 text-white">profile</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                            <li><a class="dropdown-item text-white" href="#">New project...</a></li>
-                            <li><a class="dropdown-item text-white" href="#">Settings</a></li>
-                            <li><a class="dropdown-item text-white" href="#">Profile</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item text-white" href="#">Sign out</a></li>
-                        </ul>
-                    </div>
+
                 </div>
+
             </div>
 
-            <div class="col py-3">
+            <nav class="navbar navbar-dark "
+                style="background-color: #2390d3;width: 99%; margin-left: 35px;margin-right: 20px;">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
 
 
-                <div class="conatainer-sm " style="top:0">
-                    <div class="collapse" id="navbarToggleExternalContent">
-                        <div class="bg-white p-4">
-                            <ul class="ul">
-                                <li><a href="#" class="active">home</a></li>
-                                <li> <a href="{%url 'emp:register' %}" class="">register</a></li>
-
-                                <li> <a href="{%url 'core:profiles' %}" class="">employes</a></li>
-                                <li> <a href="#" class="">contanct</a></li>
-
-                                <li> <a href="#" class="">service</a></li>
-                                <li> <a href="#" class="">privace</a></li>
-
-                                <li> <a href="#" class="">about</a></li>
-                            </ul>
-
+                    </button>
+                    <span class="h1 text-white">WELCOME JINKA UNIVERSITY EMS HOME PAGE
+                    </span>
+                    <span class="text-white" style="float:right ;">{{nm}}&nbsp;&nbsp; &nbsp;
+                        <div class="dropdown">
+                            <button onclick="myFunction()" class="dropbtn"> <img src="{%static 'pic/p.jpg'%}"
+                                    style="width:50px;height:50px;border-radius:50%" /></button>
+                            <div id="myDropdown" class="dropdown-content">
+                                <a href="{%url 'emp:profile' %}">profile</a>
+                                <a href="#">sign up</a>
+                                <a href="{%url 'emp:logout' %}">logout</a>
+                            </div>
                         </div>
-                    </div>
-
-                    <nav class="navbar navbar-dark bg-info">
-                        <div class="container-fluid">
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarToggleExternalContent"
-                                aria-controls="navbarToggleExternalContent" aria-expanded="false"
-                                aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
 
 
-                            </button>
-                            <span class="btn">welcome to jinka university online employees management system home
-                                page</span>
-                            <span class="" style="float:right ;"><img src="{%static 'pic/p.jpg'%}"
-                                    style="width:50px;height:50px;border-radius:50%" /></span>
-                        </div>
-                    </nav>
-                    {%block body%}
-
-                    <div class="row">
-                        <div class="col-3">
-                            <b>Total employees</b><br>
-                            <span id="span" class="btn btn-success text-white"
-                                style="width:200px;height:100px">0<br>{{en}}</span>
-
-                        </div>
-                        <div class="col-3">
-                            <b>Total male employees</b><br>
-                            <span id="span1" class="btn btn-warning " style="width: 200px;height:100px">0</span>
-
-                        </div>
-                        <div class="col-3">
-                            <b>Total femal employees</b><br>
-                            <span id="span2" class="btn btn-danger " style="width: 200px;height:100px">{{en}}</span>
-
-                        </div>
-                        <div class="col-3">
-                            <b>Total age under 30 employees</b><br>
-                            <span id="span3" class="btn btn-info " style="width: 200px;height:100px">0</span>
-
-                        </div>
-                    </div>
-                    <hr style="height: 40px;" class="shadow-lg">
-                    <div class="row">
-                        <div class="col-3">
-                            <b>Total active employees</b><br>
-                            <span id="span5" class="btn btn-success text-white"
-                                style="width: 200px;height:100px">0</span>
-
-                        </div>
-                        <div class="col-3">
-                            <b>Total salary above 10000 employees</b><br>
-                            <span id="span6" class="btn btn-warning " style="width: 200px;height:100px">0</span>
-
-                        </div>
-                        <div class="col-3">
-                            <b>Total salary below 10000 employees</b><br>
-                            <span id="span7" class="btn btn-danger " style="width: 200px;height:100px">{{en}}</span>
-
-                        </div>
-                        <div class="col-3">
-                            <b>Total salary above 20000 employees</b><br>
-                            <span id="span8" class="btn btn-info " style="width: 200px;height:100px">0</span>
-
-                        </div>
-                    </div>
-                    <hr style="height: 40px;" class="shadow-lg">
-                    <div class="row">
-                        <div class="col-3">
-                            <b>Total employees width disablity</b><br>
-                            <span id="span5" class="btn btn-success text-white"
-                                style="width: 200px;height:100px">0</span>
-
-                        </div>
-                        <div class="col-3">
-                            <b>Total employees bachlour degree</b><br>
-                            <span id="span6" class="btn btn-warning " style="width: 200px;height:100px">0</span>
-
-                        </div>
-                        <div class="col-3">
-                            <b>Totalemployees who have MSc</b><br>
-                            <span id="span7" class="btn btn-danger " style="width: 200px;height:100px">{{en}}</span>
-
-                        </div>
-                        <div class="col-3">
-                            <b>Total employees who have PHD</b><br>
-                            <span id="span8" class="btn btn-info " style="width: 200px;height:100px">0</span>
-
-                        </div>
-                    </div>
-                    <hr style="height: 40px;" class="shadow-lg">
-                    <div class="row">
-                        <div class="col-3">
-                            <b>Total lecturer</b><br>
-                            <span id="span5" class="btn btn-success text-white"
-                                style="width: 200px;height:100px">0</span>
-
-                        </div>
-                        <div class="col-3">
-                            <b>Total employees office worker</b><br>
-                            <span id="span6" class="btn btn-warning " style="width: 200px;height:100px">0</span>
-
-                        </div>
-                        <div class="col-3">
-                            <b>Total employe slary per month</b><br>
-                            <span id="span7" class="btn btn-danger " style="width: 200px;height:100px">{{en}}</span>
-
-                        </div>
-                        <div class="col-3">
-
-                            <div id="myProgress">
-                                <div id="myBar">
-                                    <div id="label">10%</div>
-                                </div>
-                            </div> <br> <button onclick="move()">Click Here</button>
-
-                        </div>
-                    </div>
-                    <hr style="height: 40px;" class="shadow-lg">
-                    <script>
-                        function body() {
-
-                            var n = 1;
-                            var n1 = 2000;
-                            var sp = document.querySelector('#span');
-                            var sp1 = document.querySelector('#span1');
-                            var sp2 = document.querySelector('#span2');
-                            var sp3 = document.querySelector('#span3');
-                            //var p=document.querySelector('p').value;
-                            var d = setInterval(function () {
-                                n += 1;
-                                sp.innerHTML = n;
-                            }, 100);
-                            var d = setInterval(function () {
-                                n1 -= 1;
-                                sp1.innerHTML = n1;
-                            }, 100);
-
-
-                        }
-                    </script>
-                    <script>
-                        function move() {
-                            var elem = document.getElementById("myBar");
-                            var width = 10; var id = setInterval(frame, 10);
-                            function frame() {
-                                if (width >= 100) {
-                                    clearInterval(id);
-                                } else {
-                                    width++; elem.style.width = width + '%';
-                                    document.getElementById("label").innerHTML = width * 1 + '%';
-                                }
-                            }
-                        } 
-                    </script>
-
-                    <style>
-                        #myProgress {
-                            position: relative;
-                            width: 100%;
-                            height: 30px;
-                            background-color: #ddd;
-                        }
-
-                        #myBar {
-                            position: absolute;
-                            width: 10%;
-                            height: 100%;
-                            background-color: #48d1cc;
-                        }
-
-                        #label {
-                            text-align: center;
-                            line-height: 30px;
-                            color: white;
-                        }
-                    </style>
-
+                    </span>
                 </div>
+            </nav>
+            ..
+        </div>
+        {%block body%}
+        <div class="container-sm">
 
+
+
+            <div class="row shadow-lg">
+                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+            </div>
+            <hr>
+            <div class="row shadow">
 
 
             </div>
 
-            {%endblock%}
 
+
+        </div>{%endblock%}
+        <script>
+            function myFunction() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+
+            // Close the dropdown menu if the user clicks outside of it
+            window.onclick = function (event) {
+                if (!event.target.matches('.dropbtn')) {
+                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                    var i;
+                    for (i = 0; i < dropdowns.length; i++) {
+                        var openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                        }
+                    }
+                }
+            }
+
+            window.onload = function () {
+
+
+                var options = {
+                    title: {
+                        text: "welcome to home page"
+                    },
+                    data: [
+                        {
+
+                            type: "column",
+                            dataPoints: [
+                                { label: "employers", y: 20 * "{{emp}}" },
+                                { label: "users", y: 30 * "{{user}}" },
+                                { label: "visitor", y: 25 },
+                                { label: "manager", y: 30 },
+                                { label: "attendance", y: 28 }
+                            ]
+                        }
+                    ]
+                };
+
+                $("#chartContainer").CanvasJSChart(options);
+            }
+        </script>
+
+
+        <script>
+                (function ($) {
+
+                    "use strict";
+
+                    var fullHeight = function () {
+
+                        $('.js-fullheight').css('height', $(window).height());
+                        $(window).resize(function () {
+                            $('.js-fullheight').css('height', $(window).height());
+                        });
+
+                    };
+                    fullHeight();
+
+                    $('#sidebarCollapse').on('click', function () {
+                        $('#sidebar').toggleClass('active');
+                    });
+
+                })(jQuery);
+
+        </script>
+        <style type="text/css">
+            .dropbtn {
+                background-color: #2291db;
+                color: white;
+                padding: 16px;
+                font-size: 16px;
+                border: none;
+                cursor: pointer;
+            }
+
+            /* Dropdown button on hover & focus */
+            .dropbtn:hover,
+            .dropbtn:focus {
+                background-color: #489ed7;
+            }
+
+            /* The container <div> - needed to position the dropdown content */
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            /* Dropdown Content (Hidden by Default) */
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f1f1f1;
+                min-width: 250px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+            }
+
+            /* Links inside the dropdown */
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+            /* Change color of dropdown links on hover */
+            .dropdown-content a:hover {
+                background-color: #ddd;
+            }
+
+            /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+            .show {
+                display: block;
+            }
+
+
+            .ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #333;
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            /* Change the link color to #111 (black) on hover */
+            li a:hover {
+                background-color: #111;
+            }
+
+            .home {
+                background-color: #67b0de;
+            }
+
+            .dropbtn {
+                background-color: #4e97ce;
+                color: white;
+                padding: 16px;
+                font-size: 16px;
+                border: none;
+            }
+
+            /* The container <div> - needed to position the dropdown content */
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            /* Dropdown Content (Hidden by Default) */
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f1f1f1;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+            }
+
+            /* Links inside the dropdown */
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+            /* Change color of dropdown links on hover */
+            .dropdown-content a:hover {
+                background-color: #ddd;
+            }
+
+            /* Show the dropdown menu on hover */
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            /* Change the background color of the dropdown button when the dropdown content is shown */
+            .dropdown:hover .dropbtn {
+                background-color: #489dd2;
+            }
+
+            .sidebar {
+                margin: 0;
+                padding: 0;
+                width: 300px;
+                background-color: #f1f1f1;
+                position: fixed;
+                height: 100%;
+                overflow: auto;
+            }
+
+
+            .sidebar a {
+                display: block;
+                color: black;
+                padding: 16px;
+                text-decoration: none;
+            }
+
+
+            .sidebar a.active {
+                background-color: #04AA6D;
+                color: white;
+            }
+
+
+            .sidebar a:hover:not(.active) {
+                background-color: #555;
+                color: white;
+            }
+
+
+            div.content {
+                margin-left: 200px;
+                padding: 1px 16px;
+                height: 1000px;
+            }
+
+
+            @media screen and (max-width: 700px) {
+                .sidebar {
+                    width: 100%;
+                    height: auto;
+                    position: relative;
+                }
+
+                .sidebar a {
+                    float: left;
+                }
+
+                div.content {
+                    margin-left: 0;
+                }
+            }
+
+
+            @media screen and (max-width: 400px) {
+                .sidebar a {
+                    text-align: center;
+                    float: none;
+                }
+            }
+        </style>
 </body>
 
 </html>

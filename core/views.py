@@ -10,6 +10,10 @@ from playsound import playsound
 import os
 from .models import  Profile
 
+
+
+
+
 last_face = 'no_face'
 current_path = os.path.dirname(__file__)
 sound_folder = os.path.join(current_path, 'sound/')
@@ -21,10 +25,15 @@ def index(request):
     scanned = LastFace.objects.all().order_by('date').reverse()
     present = Profile.objects.filter(present=True).order_by('updated').reverse()
     absent = Profile.objects.filter(present=False).order_by('shift')
+    nm=request.session['username']
+    un=User.objects.get(username=nm)
+    type=un.type 
+    sup=un.is_superuser
     context = {
         'scanned': scanned,
         'present': present,
         'absent': absent,
+        'type':type,'nm':nm,'sup':sup
     }
     return render(request, 'core/index.html', context)
 
@@ -94,7 +103,7 @@ def scan(request):
                         profile.save()
 
                     if last_face != name:
-                        last_face = LastFace(last_face=name)
+                        last_face = LastFace(last_face=name,user=profile)
                         last_face.save()
                         last_face = name
                         winsound.PlaySound(sound, winsound.SND_ASYNC)
@@ -131,14 +140,20 @@ def scan(request):
 
 def profiles(request):
     profiles = Profile.objects.all()
+    nm=request.session['username']
+    un=User.objects.get(username=nm)
+    type=un.type 
+    sup=un.is_superuser
     context = {
-        'profiles': profiles
+        'profiles': profiles,
+        'type':type,'nm':nm,'sup':sup
     }
     return render(request, 'core/profiles.html', context)
 
 
 def details(request):
     try:
+       
         last_face = LastFace.objects.last()
         profile = Profile.objects.get(Q(image__icontains=last_face))
     except:
@@ -157,7 +172,12 @@ def add_profile(request):
     if request.method == 'POST' :
         fn=request.POST.get('fname',False)
         ln=request.POST.get('lname',False)
-        us=request.POST.get('username',False)
+        un=request.POST.get('unsername',False)
+        #unl=request.session['usrn']
+        adby=request.session['username']
+      
+        us=User.objects.get(username=un)
+        nn=us.type
         gen=request.POST.get('gender',False)
         phon=request.POST.get('phone',False)
         em=request.POST.get('email',False)
@@ -172,7 +192,7 @@ def add_profile(request):
         shift=request.POST.get('shift',False)
         rank=request.POST.get('rank',False)
          
-        en=Profile(first_name=fn,last_name=ln,username=us,gender=gen,phone=phon,email=em,salary=sal,exp=ex,gfrom=gfrom,gyear=gyea,image=imag,age=age,profession=pro,status=status,ranking=rank,shift=shift)  
+        en=Profile.objects.create(adby=adby,type=nn,first_name=fn,last_name=ln,username=us,gender=gen,phone=phon,email=em,salary=sal,exp=ex,gfrom=gfrom,gyear=gyea,image=imag,age=age,profession=pro,status=status,ranking=rank,shift=shift)  
         en.save()
         return redirect('core:profiles')
         
@@ -182,7 +202,12 @@ def add_profile(request):
             #form.save()
             #return redirect('core:profiles')
     #context={'form':form}
-    return render(request,'core/add_profile.html')
+    un=request.session['usrn']
+    nm=request.session['username']
+    un=User.objects.get(username=nm)
+    type=un.type 
+    sup=un.is_superuser
+    return render(request,'core/add_profile.html',{'un':un, 'type':type,'nm':nm,'sup':sup})
 
 
 def edit_profile(request,id):
@@ -191,7 +216,7 @@ def edit_profile(request,id):
     if request.method == 'POST':
         fn=request.POST.get('fname',False)
         ln=request.POST.get('lname',False)
-        us=request.POST.get('username',False)
+        #us=request.POST.get('username',False)
         gen=request.POST.get('gender',False)
         phon=request.POST.get('phone',False)
         em=request.POST.get('email',False)
@@ -208,7 +233,7 @@ def edit_profile(request,id):
         p = Profile.objects.get(id=id)
         p.first_name=fn
         p.last_name=ln
-        p.username=us
+        #p.username=us
         p.gender=gen
         p.phone=phon
         p.email=em
@@ -224,8 +249,12 @@ def edit_profile(request,id):
         p.ranking=rank
         p.save()
         return redirect('core:profiles')
+    nm=request.session['username']
+    un=User.objects.get(username=nm)
+    type=un.type 
+    sup=un.is_superuser
         
-    return render(request,'core/edit_profile.html',{'pro':profile})
+    return render(request,'core/edit_profile.html',{'pro':profile, 'type':type,'nm':nm,'sup':sup})
 
 
 def delete_profile(request,id):
@@ -249,3 +278,4 @@ def reset(request):
         else:
             pass
     return redirect('core:index')
+

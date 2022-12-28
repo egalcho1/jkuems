@@ -1,0 +1,419 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            tda = tr[i].getElementsByTagName("td")[2];
+            tdi = tr[i].getElementsByTagName("td")[0];
+            if (td, tda) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || tda.innerHTML.toUpperCase().indexOf(filter) > -1 || tdi.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+</script>
+
+<script type="text/javascript" src="{%static 'jqu/jquery.min.js' %}"></script>
+<div class="container-sm">
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist" style="width: 400px; margin-left:450px;background-color:white">
+        <li class="nav-item">
+            <a class="nav-link active" id="ho" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                aria-selected="true">chatroom</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pro" data-toggle="tab" href="#ai" role="tab" aria-controls="profile"
+                aria-selected="false">AIchat</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                aria-selected="false">request</a>
+        </li>
+    </ul>
+
+    <div class="container-sm py-5" style="width: 100%;display:block" id="homa">
+
+
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-4">
+
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center p-3"
+                        style="border-top: 4px solid #ffa900;">
+                        <h5 class="mb-0">Chat messages</h5>
+                        <div class="d-flex flex-row align-items-center ">
+                            <span class=" badge bg-danger me-3">20</span>
+                            <i class="fas fa-minus me-3 text-muted fa-xs"></i>
+                            <i class="fas fa-comments me-3 text-muted fa-xs"></i>
+                            <i class="fas fa-times text-muted fa-xs"></i>
+                        </div>
+                    </div>
+
+                    <div class="card-body table table-responsive" data-mdb-perfect-scrollbar="true"
+                        style="position: relative; height: 400px;max-height: 400px;">
+                        <div class="" style="min-height: 400px;">
+                            <div class="d-flex justify-content-between" style="">
+                                {%for n in n %}
+                                <p class="small mb-1">{{n.username}}</p>
+                                <p class="small mb-1 text-muted">{{n.dt}}</p>
+                            </div>
+                            <div class="d-flex flex-row justify-content-start">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp"
+                                    alt="avatar 1" style="width: 45px; height: 100%;">
+                                <div>
+
+                                    <p class="small p-2 ms-3 mb-3 rounded-3" style="background-color: #f5f6f7;">
+                                        {{n.msg}}</p>
+                                </div>{%endfor%}
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <p class="small mb-1 text-muted">23 Jan 2:05 pm</p>
+                                <p class="small mb-1">Johny Bullock</p>
+                            </div>
+                            <div class="d-flex flex-row justify-content-end mb-4 pt-1">
+                                <div>
+                                    <p class="small p-2 me-3 mb-3 text-white rounded-3 bg-warning">Thank you for your
+                                        believe in
+                                        our
+                                        supports</p>
+                                </div>
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+                                    alt="avatar 1" style="width: 45px; height: 100%;">
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <p class="small mb-1">Timona Siera</p>
+                                <p class="small mb-1 text-muted">23 Jan 5:37 pm</p>
+                            </div>
+                            <div class="d-flex flex-row justify-content-start">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp"
+                                    alt="avatar 1" style="width: 45px; height: 100%;">
+                                <div>
+                                    <p class="small p-2 ms-3 mb-3 rounded-3" style="background-color: #f5f6f7;">Lorem
+                                        ipsum
+                                        dolor
+                                        sit amet
+                                        consectetur adipisicing elit similique quae consequatur</p>
+                                </div>
+
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <p class="small mb-1 text-muted">23 Jan 6:10 pm</p>
+                                <p class="small mb-1">Johny Bullock</p>
+                            </div>
+                            <div class="d-flex flex-row justify-content-end mb-4 pt-1">
+                                <div>
+                                    <p class="small p-2 me-3 mb-3 text-white rounded-3 bg-warning">Dolorum quasi
+                                        voluptates
+                                        quas
+                                        amet in
+                                        repellendus perspiciatis fugiat</p>
+                                </div>
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+                                    alt="avatar 1" style="width: 45px; height: 100%;">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
+                        <div class="input-group mb-0">
+                            <input type="text" class="form-control" placeholder="Type message" id="sendh" />
+                            <button class="btn btn-warning" id="btn">
+                                send <p class="bi bi-send"></p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="div" style="display:none">
+            <p class="p1" id="p">.</p>
+            <p class="p2" id="p">.</p>
+            <p class="p3" id="p">.</p>
+        </div>
+        <style type="text/css" media="all">
+            .div #p {
+
+                float: left;
+                font-size: 60px;
+
+
+            }
+
+            @keyframes example {
+                0% {
+                    font-size: 60px;
+                }
+
+                25% {
+                    font-size: 55px;
+                }
+
+                50% {
+                    font-size: 65px;
+                }
+
+                100% {
+                    font-size: 60px;
+                }
+            }
+
+            .p1 {
+                animation-name: example;
+                animation-duration: 1s;
+                animation-iteration-count: 6;
+            }
+        </style>
+        </body>
+
+    </div>
+    <script>
+        $(document).ready(function () {
+
+            $('#nbtn').on('click', function () {
+                var sendh = document.querySelector('#sendh').value;
+                $.ajax({
+                    url: "{%url 'emp:request' %}",
+                    type: 'GET',
+                    data: {
+                        txt: sendh,
+                    }
+                    , success: function (response) {
+
+                    }
+                });
+            });
+        });
+        /*setInterval(function () {
+            var url = "{%url 'emp:request' %}";
+            //var last_face = document.getElementById('last_face').innerHTML;
+            $.ajax({
+                url: url,
+                success: function () {
+
+                    url.reload()
+
+                }
+            })
+        }, 1000);*/
+
+    </script>
+
+
+
+
+
+
+
+
+    <div class="cantainer-sm" id="ai" style="display: none;">
+
+        <div class="container py-5">
+
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-4">
+
+                    <div class="card" id="chat1" style="border-radius: 15px;">
+                        <div class="card-header d-flex justify-content-between align-items-center p-3 bg-info text-white border-bottom-0"
+                            style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                            <i class="fas fa-angle-left"></i>
+                            <p class="mb-0 fw-bold">Live chat</p>
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center p-3"
+                                style="border-top: 4px solid #ffa900;">
+                                <h5 class="mb-0">Chat messages</h5>
+                                <div class="d-flex flex-row align-items-center">
+                                    <span class="badge bg-warning me-3">20</span>
+                                    <i class="fas fa-minus me-3 text-muted fa-xs"></i>
+                                    <i class="fas fa-comments me-3 text-muted fa-xs"></i>
+                                    <i class="fas fa-times text-muted fa-xs"></i>
+                                </div>
+                            </div>
+                            <div class="card-body table table-responsive " data-mdb-perfect-scrollbar="true"
+                                style="position: relative; max-height: 400px">
+                                <div class="" style="min-height:400px">
+
+                                    <div class="d-flex justify-content-between">
+                                        <p class="small mb-1">
+                                            jkuems
+                                        </p>
+                                        <p class="small mb-1 text-muted">
+                                            23 Jan 2:00 pm
+                                        </p>
+                                    </div>
+
+
+                                    <div class="d-flex flex-row justify-content-start">
+                                        <div>
+                                            welcome boss how can i help you ?
+                                            <ul class="jku" id="jku">
+
+
+
+                                            </ul>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between">
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
+                                <div class="input-group mb-0">
+                                    <input type="text" class="form-control nma " placeholder="Type message" id="nma" />
+                                    <button class="btn btn-warning" id="btna" onclick="senda()"
+                                        style="padding-top: .55rem;">
+                                        send
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            </section>
+
+        </div>
+        <script src="{%static 'jqu/bt.js' %}"></script>
+        <style>
+            #chat1 .form-outline .form-control~.form-notch div {
+                pointer-events: none;
+                border: 1px solid;
+                border-color: #eee;
+                box-sizing: border-box;
+                background: transparent;
+            }
+
+            #chat1 .form-outline .form-control~.form-notch .form-notch-leading {
+                left: 0;
+                top: 0;
+                height: 100%;
+                border-right: none;
+                border-radius: .65rem 0 0 .65rem;
+            }
+
+            #chat1 .form-outline .form-control~.form-notch .form-notch-middle {
+                flex: 0 0 auto;
+                max-width: calc(100% - 1rem);
+                height: 100%;
+                border-right: none;
+                border-left: none;
+            }
+
+            #chat1 .form-outline .form-control~.form-notch .form-notch-trailing {
+                flex-grow: 1;
+                height: 100%;
+                border-left: none;
+                border-radius: 0 .65rem .65rem 0;
+            }
+
+            #chat1 .form-outline .form-control:focus~.form-notch .form-notch-leading {
+                border-top: 0.125rem solid #39c0ed;
+                border-bottom: 0.125rem solid #39c0ed;
+                border-left: 0.125rem solid #39c0ed;
+            }
+
+            #chat1 .form-outline .form-control:focus~.form-notch .form-notch-leading,
+            #chat1 .form-outline .form-control.active~.form-notch .form-notch-leading {
+                border-right: none;
+                transition: all 0.2s linear;
+            }
+
+            #chat1 .form-outline .form-control:focus~.form-notch .form-notch-middle {
+                border-bottom: 0.125rem solid;
+                border-color: #39c0ed;
+            }
+
+            #chat1 .form-outline .form-control:focus~.form-notch .form-notch-middle,
+            #chat1 .form-outline .form-control.active~.form-notch .form-notch-middle {
+                border-top: none;
+                border-right: none;
+                border-left: none;
+                transition: all 0.2s linear;
+            }
+
+            #chat1 .form-outline .form-control:focus~.form-notch .form-notch-trailing {
+                border-top: 0.125rem solid #39c0ed;
+                border-bottom: 0.125rem solid #39c0ed;
+                border-right: 0.125rem solid #39c0ed;
+            }
+
+            #chat1 .form-outline .form-control:focus~.form-notch .form-notch-trailing,
+            #chat1 .form-outline .form-control.active~.form-notch .form-notch-trailing {
+                border-left: none;
+                transition: all 0.2s linear;
+            }
+
+            #chat1 .form-outline .form-control:focus~.form-label {
+                color: #39c0ed;
+            }
+
+            #chat1 .form-outline .form-control~.form-label {
+                color: #bfbfbf;
+            }
+        </style>
+
+    </div>
+    <script>
+        var ai = document.querySelector('#pro');
+        var a = document.querySelector('#ai');
+        var h = document.querySelector('#homa');
+        var ho = document.querySelector('#ho');
+        ai.addEventListener('click', () => {
+            h.setAttribute("style", "display:none");
+            a.setAttribute("style", "display:block");
+
+        })
+        ho.addEventListener('click', () => {
+
+            a.setAttribute("style", "display:none");
+            h.setAttribute("style", "display:block");
+
+        })
+
+
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+
+
+    </script>
+
+
+    {% endblock content %}

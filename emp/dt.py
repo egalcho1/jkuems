@@ -26,5 +26,29 @@ class Employe(models.Model):
     dt=models.DateField(auto_now=True)
     def __str__(self):
         return self.username
+    'first_name','last_name','date','phone','email','ranking','profession','status','username','shift','gender','age','salary','exp','image'
     
-    
+    image = models.CharField(max_length=100,null=True)
+image.contribute_to_class(User, 'image')
+salary= models.IntegerField(null=True)
+salary.contribute_to_class(User, 'slary')
+profession = models.CharField(max_length=255,null=True)
+profession.contribute_to_class(User, 'profession')
+phone = models.IntegerField(null=True)
+phone.contribute_to_class(User, 'phone')
+rank = models.IntegerField(null=True)
+rank.contribute_to_class(User, 'rank')
+status = models.CharField(choices=types,max_length=20,null=True,blank=False,default='employee')
+status.contribute_to_class(User, 'status')
+present = models.BooleanField(default=False)
+present.contribute_to_class(User, 'present')
+updated = models.DateTimeField(auto_now=True)
+updated.contribute_to_class(User, 'updated')
+shift = models.TimeField(null=True)
+shift.contribute_to_class(User, 'shift')
+gender=models.CharField(max_length=255,null=True)
+gender.contribute_to_class(User, 'gender')
+age=models.DateField(null=True)
+age.contribute_to_class(User, 'age')
+exp=models.IntegerField(null=True)
+exp.contribute_to_class(User, 'exp')
